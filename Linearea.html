@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Chart with 4 Axes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" href="style.css" media="screen">
+<link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css" />
+
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js" 
+				data-dojo-config="isDebug: true,parseOnLoad: true"></script>
+<script>
+
+dojo.require("dojox.charting.Chart2D");
+dojo.require("dojox.charting.themes.Claro");
+dojo.require("dojox.charting.widget.Legend");
+dojo.require("dojox.charting.action2d.Tooltip");
+dojo.require("dojox.charting.action2d.Magnify");
+
+var stacked = [12000, 13000, 14000, 15000, 17000, 12000, 15000, 18000, 13000, 15000, 12000];
+	
+makeCharts = function(){
+
+	var chart1 = new dojox.charting.Chart2D("simplechart");
+
+	chart1.setTheme(dojox.charting.themes.Claro);
+	
+	chart1.addPlot("default", {type: "Lines", markers: true});
+	chart1.addPlot("other1", {type: "Columns",markers: true});
+	chart1.addPlot("other2", {type: "StackedAreas",markers: true});
+	
+	chart1.addAxis("x", { labels: [{value:1, text:"2030"} , {value:2, text:"2035"},
+						 		{value:3, text:"2040"}, {value:4, text:"2045"},    
+								{value:5, text:"2050"}, {value:6, text:"2055"},
+								{value:7, text:"2060"}, {value:8, text:"2065"},
+								{value:9, text:"2070"}, {value:10, text:"2075"},
+								{value:11, text:"2080"}]});
+	chart1.addAxis("y", {min: 0, max: 23000, vertical: true, fixLower: "major", fixUpper: "major"});
+
+	chart1.addSeries("Series 1", [5500, 5700, 5900, 6100, 6300, 6500, 6800, 7000, 7200, 15000, 20000]);
+	chart1.addSeries("Series 2", [5500, 5700, 5900, 6100, 3000, 2000, 4000, 2000, 1000, 5000, 6000], {plot: "other1"});
+	chart1.addSeries("Series 3", stacked, {plot: "other2"});
+	// Create the tooltip
+	var tip = new dojox.charting.action2d.Tooltip(chart1,"default");
+	var tip = new dojox.charting.action2d.Tooltip(chart1,"other1");
+	var tip = new dojox.charting.action2d.Tooltip(chart1,"other2");		
+	// Create the magnifier
+	var mag = new dojox.charting.action2d.Magnify(chart1,"default");
+	var mag = new dojox.charting.action2d.Magnify(chart1,"other1");
+	var mag = new dojox.charting.action2d.Magnify(chart1,"other2");
+	chart1.render();
+	var legend = new dojox.charting.widget.Legend({ chart1: chart1 }, "legend");
+};
+
+dojo.addOnLoad(makeCharts);
+
+</script>
+
+</head>
+<body>
+<div id="simplechart" style="width: 800px; height: 600px;"></div>
+<div id="legend"></div>
+
+</body>
+</html>
