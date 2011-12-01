@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Spiderchart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" href="style.css" media="screen">
+<link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css" />
+
+<script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="Dojo1.7/dojo/dojo.js"></script>
+
+<script>
+
+require(["dojox/charting/Chart2D","dojox/charting/themes/Claro","dojo/ready","dojo/ready",
+		"dojox/charting/action2d/Tooltip","dojox/charting/action2d/Magnify","dojox/charting/widget/Legend"], 
+		function(Chart2D, Claro, ready, Tooltip, Magnify, Legend) {
+		
+	ready(function() {
+		
+		var data = [
+		{"Sales":83, "Marketing":223, "development":124},
+		{"Sales":120, "Marketing":300, "development":100},
+		{"Sales":140, "Marketing":250, "development":148}];
+		
+		var chart1 = new Chart2D('spiderchart');
+		
+		chart1.setTheme(dojox.charting.themes.Claro);
+		
+		chart1.addPlot("default", { type: "Spider", 
+									labelOffset: 10,
+									divisions: 4,
+									seriesFillAlpha: .10,
+									markerSize: 6,
+									precision: 0,
+									spiderType: "circle"});
+			
+		chart1.addSeries("2010", {data:data[0]}, {fill:"blue"});
+		chart1.addSeries("2011", {data:data[1]}, {fill:"red"});
+		chart1.addSeries("2012", {data:data[2]}, {fill:"green"});
+	
+
+	chart1.render();
+		
+	var Legend = new dojox.charting.widget.Legend({ chart: chart1 }, "linechartLegend");	
+			
+
+			});
+			});
+			
+</script>
+
+</head>
+<body>
+<div id="spiderchart" style="width: 800px; height: 600px;"></div>
+<div id="linechartLegend"></div>
+</body>
+</html>
+	
