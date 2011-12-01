@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Piechart</title>
+<script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="Dojo1.7/dojo/dojo.js"></script>
+
+<script>
+
+require(["dojox/charting/Chart2D","dojox/charting/action2d/Tooltip","dojox/charting/themes/Claro",
+		"dojox/charting/widget/Legend", "dojo/ready","dojox/charting/action2d/MoveSlice"], 
+		function(Chart2D, Tooltip, Claro, Legend, ready, MoveSlice) {
+
+ready(function() {
+	var pieData = { 2012: [1020, 3020, 3200, 5000, 2917]};
+	
+	var piechart = new dojox.charting.Chart2D("piechart1");
+	
+	piechart.setTheme(dojox.charting.themes.Claro);
+	
+	piechart.addPlot("default", {
+					type: "Pie",
+					radius: 150,
+					fontColor:"black",
+					markers: true});
+	
+	piechart.addAxis("x");
+	piechart.addAxis("y");
+					
+	piechart.addSeries("2012", pieData['2012']);
+
+	var tip = new dojox.charting.action2d.Tooltip(piechart,"default");
+	var move = new dojox.charting.action2d.MoveSlice(piechart,"default");	
+		
+	piechart.render();
+	
+	var legend1 = new Legend({ chart: piechart}, "piechartLegend");
+	
+			});
+			});
+			
+</script>
+
+</head>
+<body>
+<div id="piechart1" style="width: 800px; height: 600px;"></div>
+<div id="piechartLegend"></div>
+</body>
+</html>
+	
