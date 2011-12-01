@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Linearea</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" href="style.css" media="screen">
+<link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css" />
+
+<script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="Dojo1.7/dojo/dojo.js"></script>
+
+<script>
+
+require(["dojox/charting/Chart2D","dojox/charting/themes/Claro","dojo/ready","dojo/ready",
+		"dojox/charting/action2d/Tooltip","dojox/charting/action2d/Magnify","dojox/charting/widget/Legend"], 
+		function(Chart2D, Claro, ready, Tooltip, Magnify, Legend) {
+		
+	ready(function() {
+		
+		var data = {
+		Graph1:[1,2,2,3,4,5,5,7],
+		Graph2:[2,3,3,6,7,4,3,2],
+		Graph3:[4,5,8,10,8,9,11]};
+		
+		var chart1 = new Chart2D('linechart');
+		
+		chart1.setTheme(dojox.charting.themes.Claro);
+		
+		chart1.addPlot("default", { type: "Lines", markers: true});
+		chart1.addPlot("other1", {type: "Columns",markers: true});
+		chart1.addPlot("other2", {type: "StackedAreas",markers: true});
+		
+		chart1.addAxis("x");
+		chart1.addAxis("y", {
+			vertical: true
+			});
+			
+			chart1.addSeries("Graph 1", data['Graph1']);
+			chart1.addSeries("Graph 2", data['Graph2'], {plot: "other1"});
+			chart1.addSeries("Graph 3", data['Graph3'], {plot: "other2"});
+	
+	
+	var tip = new dojox.charting.action2d.Tooltip(chart1,"default");
+	var tip = new dojox.charting.action2d.Tooltip(chart1,"other1");
+	var tip = new dojox.charting.action2d.Tooltip(chart1,"other2");	
+
+	var mag = new dojox.charting.action2d.Magnify(chart1,"default");
+	var mag = new dojox.charting.action2d.Magnify(chart1,"other1");
+	var mag = new dojox.charting.action2d.Magnify(chart1,"other2");
+	
+	chart1.render();
+		
+	var Legend = new dojox.charting.widget.Legend({ chart: chart1 }, "linechartLegend");	
+			
+
+			});
+			});
+			
+</script>
+
+</head>
+<body>
+<div id="linechart" style="width: 800px; height: 600px;"></div>
+<div id="linechartLegend"></div>
+</body>
+</html>
+	
