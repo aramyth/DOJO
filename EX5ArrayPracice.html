@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Linearea</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" href="style.css" media="screen">
+<link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css" />
+
+<script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="Dojo1.7/dojo/dojo.js"></script>
+
+<script>
+
+require(["dojox/charting/Chart2D","dojox/charting/themes/Claro","dojo/ready","dojo/ready",
+		"dojox/charting/action2d/Tooltip","dojox/charting/action2d/Magnify","dojox/charting/widget/Legend"], 
+		function(Chart2D, Claro, ready, Tooltip, Magnify, Legend) {
+		
+	ready(function() {
+		
+		var data1 = [1,1,1,1];
+		var data2 = [2,2,2,2];
+		
+		var data3 = [];
+		
+		for(var i = 0; i < data2.length; i++)
+		{
+			data3[i] = data1[i] + data2[i];
+			
+		}
+	
+	/*		for (var i=0; i < data1.length; i++)
+		{
+			data3 = data1[i] + data2[i];
+			document.write(data3);
+			
+		}	*/	
+		
+		var chart1 = new Chart2D('linechart');
+		
+		chart1.setTheme(dojox.charting.themes.Claro);
+		
+		chart1.addPlot("default", {type: "Lines", markers: true});
+		chart1.addPlot("other1", {type: "Columns",markers: true});
+		chart1.addPlot("other2", {type: "StackedAreas",markers: true});
+		
+		chart1.addAxis("x");
+		chart1.addAxis("y", {
+			vertical: true
+			});
+			
+			chart1.addSeries("Graph 1", data1);
+			chart1.addSeries("Graph 2", data2, {plot: "other1"});
+			chart1.addSeries("Graph 3", data3, {plot: "other2"});
+	
+	
+
+	chart1.render();
+		
+			});
+			});
+			
+</script>
+
+</head>
+<body>
+<div id="linechart" style="width: 800px; height: 600px;"></div>
+
+</body>
+</html>
+	
