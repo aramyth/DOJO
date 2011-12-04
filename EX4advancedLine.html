@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Piechart</title>
+<title>AdvancedLinechart</title>
 
 <link rel="stylesheet" href="style.css" media="screen">
 <link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
@@ -11,8 +11,8 @@
 <script>
 
 require(["dojox/charting/Chart2D","dojox/charting/action2d/Tooltip","dojox/charting/themes/Claro",
-		"dojox/charting/widget/Legend", "dojo/ready","dojox.store.Observable","dojo.store.Memory",
-		"dojox.charting.StoreSeries"], 
+		"dojox/charting/widget/Legend", "dojo/ready","dojo/store/Observable","dojo/store/Memory",
+		"dojox/charting/StoreSeries"], 
 		function(Chart2D, Tooltip, Claro, Legend, ready, Memory, StoreSeries) {
 
 ready(function() {
@@ -41,7 +41,6 @@ ready(function() {
 	
 	linechart.addPlot("default", {
 					type: "Lines",
-					radius: 150,
 					markers: true});
 	
 	linechart.addAxis("x", { microTickStep: 1, minorTickStep: 1, max: 60 });
@@ -52,11 +51,21 @@ ready(function() {
 	linechart.addSeries("y2", new dojox.charting.StoreSeries(store, { query: { site:2}}, "value"));
 	
 
-	var tip = new dojox.charting.action2d.Tooltip(piechart,"default");
+	var tip = new dojox.charting.action2d.Tooltip(linechart,"default");
 		
-	piechart.render();
+	linechart.render();
 	
-	var legend1 = new Legend({ chart: piechart}, "piechartLegend");
+	var startNumber = data.length;
+	var interval = setInterval(function() {
+			// Notify the store of a data change
+			store.notify({ value: Math.ceil(Math.random()*29), id: ++startNumber, site: 1 });
+			store.notify({ value: Math.ceil(Math.random()*29), id: ++startNumber, site: 2 });
+			// Stop at 50
+			if(startNumber == 120) clearInterval(interval);
+			},1000);
+
+	
+	var legend1 = new Legend({ chart: piechart}, "linechartLegend");
 	
 			});
 			});
@@ -65,8 +74,8 @@ ready(function() {
 
 </head>
 <body>
-<div id="piechart1" style="width: 800px; height: 600px;"></div>
-<div id="piechartLegend"></div>
+<div id="linechart1" style="width: 800px; height: 600px;"></div>
+<div id="linechartLegend"></div>
 </body>
 </html>
 	
