@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Piechart</title>
+
+<link rel="stylesheet" href="style.css" media="screen">
+<link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css" />
+
+<script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="Dojo1.7/dojo/dojo.js"></script>
+
+<script>
+
+require(["dojox/charting/Chart2D","dojox/charting/action2d/Tooltip","dojox/charting/themes/Claro",
+		"dojox/charting/widget/Legend", "dojo/ready","dojox.store.Observable","dojo.store.Memory",
+		"dojox.charting.StoreSeries"], 
+		function(Chart2D, Tooltip, Claro, Legend, ready, Memory, StoreSeries) {
+
+ready(function() {
+	var data = [{id: 1, value: 15, site: 1},
+				{id: 2, value: 20, site: 1},
+				{id: 3, value: 12, site: 1},
+				{id: 4, value: 23, site: 1},
+				{id: 5, value: 13, site: 1},
+				{id: 6, value: 17, site: 2},
+				{id: 7, value: 23, site: 2},
+				{id: 8, value: 23, site: 2},
+				{id: 9, value: 18, site: 2},
+				{id: 10, value:25, site: 2}];
+	
+	var store = dojo.store.Observable(new dojo.store.Memory({
+			data: {
+					identifier: "id",
+					label: "Users Online",
+					items: data
+					}
+				}));
+
+	var linechart = new dojox.charting.Chart2D("linechart1");
+	
+	linechart.setTheme(dojox.charting.themes.Claro);
+	
+	linechart.addPlot("default", {
+					type: "Lines",
+					radius: 150,
+					markers: true});
+	
+	linechart.addAxis("x", { microTickStep: 1, minorTickStep: 1, max: 60 });
+	linechart.addAxis("y", { vertical: true, fixLower: "major", fixUpper: "major", minorTickStep: 1 });	
+	
+	
+	linechart.addSeries("y", new dojox.charting.StoreSeries(store, { query: { site:1}}, "value"));
+	linechart.addSeries("y2", new dojox.charting.StoreSeries(store, { query: { site:2}}, "value"));
+	
+
+	var tip = new dojox.charting.action2d.Tooltip(piechart,"default");
+		
+	piechart.render();
+	
+	var legend1 = new Legend({ chart: piechart}, "piechartLegend");
+	
+			});
+			});
+			
+</script>
+
+</head>
+<body>
+<div id="piechart1" style="width: 800px; height: 600px;"></div>
+<div id="piechartLegend"></div>
+</body>
+</html>
+	
