@@ -9,11 +9,10 @@
 		<script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="Dojo1.7/dojo/dojo.js"></script>
 		
 		<script>
-			require(["dojo/ready", "dojo/parcer","dojo/dom","dojo/_base/array","dojo"], function(ready,parcer,dom,array,dojo) {
-			ready(function(){
+			require(["dojo"], function(dojo) {
 				var original = ["one", "two", "three", "four", "five"],
-					list2 = dom.byId("list2"),
-					list3 = dom.byId("list3"),
+					list2 = dojo.byId("list2"),
+					list3 = dojo.byId("list3"),
 					mapped, filtered;
 
 				mapped = dojo.map(original, function(item, index){
@@ -40,8 +39,7 @@
 					}, list3);
 				});
 			});
-			});
-			
+		
 			</script>
 	</head>
 	<body>
