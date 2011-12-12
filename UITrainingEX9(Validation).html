@@ -6,34 +6,44 @@
 		<link rel="stylesheet" href="http://dojotoolkit.org/documentation/tutorials/1.6/validation/demo/style.css" media="screen">
 		<link rel="stylesheet" href="../../resources/style/demo.css" media="screen">
 		<style type="text/css" title="text/css">
-			@import "http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css";
-			@import "http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojox/form/resources/CheckedMultiSelect.css";
+			@import "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css";
+			@import "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/form/resources/CheckedMultiSelect.css";
 		</style>
 		<!-- load dojo and provide config via data attribute -->
-		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js"
-				data-dojo-config="isDebug: true,parseOnLoad: true">
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.0/dojo/dojo.js"
+				data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1, parseOnLoad: true">
 		</script>
+		
 		<script>
-			dojo.require('dojox.validate');
+			require(["dojox/validate","dojox/validate/us","dojox/validate/web","dijit/form/CheckBox",
+			"dijit/form/Textarea","dijit/form/FilteringSelect","dijit/form/TextBox","dijit/form/ValidationTextBox","dijit/form/DateTextBox",
+			"dijit/form/TimeTextBox","dijit/form/Button","dijit/form/RadioButton","dijit/form/Form","dijit/form/DateTextBox",
+			"dojox/form/BusyButton","dojox/form/CheckedMultiSelect"], 
+			
+			function(validate,us,web,CheckBox,Textarea,FilteringSelect,TextBox,ValidationTextBox,DateTextBox,TimeTextBox,Button,RadioButton,
+				Form,DateTextBox,BusyButton,CheckedMultiSelect) {
+			
+			});
+			/* dojo.require('dojox.validate');
 			dojo.require('dojox.validate.us');
 			dojo.require('dojox.validate.web');
 			
-			/* basic dijit classes */
+			
 			dojo.require('dijit.form.CheckBox');
 			dojo.require('dijit.form.Textarea');
 			dojo.require('dijit.form.FilteringSelect');
-			dojo.require('dijit.form.TextBox');
-			dojo.require('dijit.form.ValidationTextBox');
-			dojo.require('dijit.form.DateTextBox');
-			dojo.require('dijit.form.TimeTextBox');
-			dojo.require('dijit.form.Button');
-			dojo.require('dijit.form.RadioButton');
-			dojo.require('dijit.form.Form');
-			dojo.require('dijit.form.DateTextBox');
+			dojo.require('dijit/form/TextBox');
+			dojo.require('dijit/form/ValidationTextBox');
+			dojo.require('dijit/form/DateTextBox');
+			dojo.require('dijit/form/TimeTextBox');
+			dojo.require('dijit/form/Button');
+			dojo.require('dijit/form/RadioButton');
+			dojo.require('dijit/form/Form');
+			dojo.require('dijit/form/DateTextBox');
 			
-			/* basic dojox classes */
-			dojo.require('dojox.form.BusyButton');
-			dojo.require('dojox.form.CheckedMultiSelect');
+			
+			dojo.require('dojox/form/BusyButton');
+			dojo.require('dojox/form/CheckedMultiSelect');*/
 		</script>
 	</head>
 	<body class="claro">
